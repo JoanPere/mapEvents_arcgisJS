@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
     <title></title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.15/esri/css/esri.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css">
     <style>
       html, body, #map {
         height: 100%;
@@ -12,7 +12,7 @@
         padding: 0;
       }
     </style>
-    <script src="https://js.arcgis.com/3.15/"></script>
+    <script src="https://js.arcgis.com/3.19/"></script>
     <script>
       var map;
 
@@ -23,40 +23,40 @@
         "esri/graphic", 
         "esri/layers/GraphicsLayer",
         "dojo/domReady!"], 
-		function(Map,
-      Point,
-      SimpleMarkerSymbol,
-      Color,
-      Graphic,
-      GraphicsLayer) {
+	function(Map,
+	      Point,
+	      SimpleMarkerSymbol,
+	      Color,
+	      Graphic,
+	      GraphicsLayer) {
         	
-      map = new Map("map", {
-      		basemap: "streets",
-  		zoom: 5
-    	});
-	
-    	var symbol = new SimpleMarkerSymbol("circle", 20, null, new Color([0, 0, 0, 0.75]));
-
-    	var gl = new GraphicsLayer({ id: "points" });
-    	map.addLayer(gl);
-
-    	map.on("layer-add-result", function(change){
-		    alert("ya se han añadido todas las capas al mapa");
-	   });
-
-			map.on("zoom-end", function(evt){
-				alert("el ZOOM ha cambiado");
-				alert("factor de Zoom" + evt.level);
-				alert("nuevo Xmax, Ymax:" + evt.extent.xmax + ", " + evt.extent.ymax);
-			});
-
-			map.on("click", function(mouseEvent){
-				alert("hemos hecho click en el mapa");
-				var p = mouseEvent.mapPoint;
-				graphic = new Graphic(p,symbol);
-				gl.add(graphic);
-			});
+		map = new Map("map", {
+			basemap: "streets",
+			zoom: 5
 		});
+
+		var symbol = new SimpleMarkerSymbol("circle", 20, null, new Color([0, 0, 0, 0.75]));
+
+		var gl = new GraphicsLayer({ id: "points" });
+		map.addLayer(gl);
+
+		map.on("layer-add-result", function(change){
+			    alert("ya se han añadido todas las capas al mapa");
+		   });
+
+		map.on("zoom-end", function(evt){
+			alert("el ZOOM ha cambiado");
+			alert("factor de Zoom" + evt.level);
+			alert("nuevo Xmax, Ymax:" + evt.extent.xmax + ", " + evt.extent.ymax);
+		});
+
+		map.on("click", function(mouseEvent){
+			alert("hemos hecho click en el mapa");
+			var p = mouseEvent.mapPoint;
+			graphic = new Graphic(p,symbol);
+			gl.add(graphic);
+		});
+	});
 		
     </script>
   </head>
